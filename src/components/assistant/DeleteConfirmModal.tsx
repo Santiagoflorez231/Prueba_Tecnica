@@ -22,15 +22,11 @@ export default function DeleteConfirmModal({
   if (!assistant) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="sm">
+    <Modal isOpen={isOpen} onClose={onClose} size="sm" title="Eliminar asistente">
       <div className="p-6 text-center">
-        <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
           <AlertTriangle className="w-6 h-6 text-red-600" />
         </div>
-
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          Eliminar asistente
-        </h3>
 
         <p className="text-gray-500 mb-6">
           ¿Estás seguro de que deseas eliminar a{' '}
@@ -38,12 +34,12 @@ export default function DeleteConfirmModal({
           Esta acción no se puede deshacer.
         </p>
 
-        <div className="flex gap-3 justify-center">
+        <div className="flex gap-3 justify-center" role="group" aria-label="Acciones de confirmación">
           <Button variant="secondary" onClick={onClose} disabled={isDeleting}>
             Cancelar
           </Button>
           <Button variant="danger" onClick={onConfirm} isLoading={isDeleting}>
-            Eliminar
+            {isDeleting ? 'Eliminando...' : 'Eliminar'}
           </Button>
         </div>
       </div>

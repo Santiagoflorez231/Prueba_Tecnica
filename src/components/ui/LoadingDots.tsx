@@ -11,8 +11,13 @@ export default function LoadingDots({ size = 'md', text }: LoadingDotsProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <div className="flex flex-row gap-2">
+    <div 
+      className="flex flex-col items-center justify-center gap-4"
+      role="status"
+      aria-live="polite"
+      aria-label={text || 'Cargando'}
+    >
+      <div className="flex flex-row gap-2" aria-hidden="true">
         <div className={`${sizes[size]} rounded-full bg-[#EB3C62] animate-bounce`} />
         <div className={`${sizes[size]} rounded-full bg-[#FFAA4D] animate-bounce [animation-delay:-.3s]`} />
         <div className={`${sizes[size]} rounded-full bg-[#EB3C62] animate-bounce [animation-delay:-.5s]`} />

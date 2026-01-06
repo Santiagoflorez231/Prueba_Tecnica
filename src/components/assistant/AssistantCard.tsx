@@ -26,10 +26,13 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
   };
 
   return (
-    <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 p-5">
+    <article 
+      className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 p-5"
+      aria-label={`Asistente ${assistant.name}`}
+    >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+          <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-gray-200 transition-colors" aria-hidden="true">
             <Bot className="w-6 h-6 text-gray-600" />
           </div>
           <div>
@@ -38,12 +41,12 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
             </h3>
             <div className="flex items-center gap-2 mt-0.5">
               <span className="text-xs text-gray-500 flex items-center gap-1">
-                <Globe className="w-3 h-3" />
+                <Globe className="w-3 h-3" aria-hidden="true" />
                 {assistant.language}
               </span>
               {assistant.audioEnabled && (
                 <span className="text-xs text-[#EB3C62] flex items-center gap-1">
-                  <Volume2 className="w-3 h-3" />
+                  <Volume2 className="w-3 h-3" aria-hidden="true" />
                   Audio
                 </span>
               )}
@@ -51,20 +54,20 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
           </div>
         </div>
         
-        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
           <button
             onClick={() => onEdit(assistant)}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-            title="Editar"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#EB3C62] transition-colors"
+            aria-label={`Editar asistente ${assistant.name}`}
           >
-            <Pencil className="w-4 h-4" />
+            <Pencil className="w-4 h-4" aria-hidden="true" />
           </button>
           <button
             onClick={() => onDelete(assistant)}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-            title="Eliminar"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+            aria-label={`Eliminar asistente ${assistant.name}`}
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -77,22 +80,41 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
       </div>
 
       <div className="mb-4">
-        <p className="text-xs text-gray-500 mb-2">Longitud de respuestas</p>
-        <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden bg-gray-100">
+        <p className="text-xs text-gray-500 mb-2" id={`response-length-${assistant.id}`}>Longitud de respuestas</p>
+        <div 
+          className="flex gap-0.5 h-1.5 rounded-full overflow-hidden bg-gray-100"
+          role="group"
+          aria-labelledby={`response-length-${assistant.id}`}
+        >
           <div
             className="bg-emerald-400"
             style={{ width: `${assistant.responseLength.short}%` }}
+            role="progressbar"
+            aria-valuenow={assistant.responseLength.short}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`Respuestas cortas: ${assistant.responseLength.short}%`}
           />
           <div
             className="bg-amber-400"
             style={{ width: `${assistant.responseLength.medium}%` }}
+            role="progressbar"
+            aria-valuenow={assistant.responseLength.medium}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`Respuestas medianas: ${assistant.responseLength.medium}%`}
           />
           <div
             className="bg-[#EB3C62]"
             style={{ width: `${assistant.responseLength.long}%` }}
+            role="progressbar"
+            aria-valuenow={assistant.responseLength.long}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`Respuestas largas: ${assistant.responseLength.long}%`}
           />
         </div>
-        <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+        <div className="flex justify-between text-[10px] text-gray-400 mt-1" aria-hidden="true">
           <span>Cortas {assistant.responseLength.short}%</span>
           <span>Medianas {assistant.responseLength.medium}%</span>
           <span>Largas {assistant.responseLength.long}%</span>
@@ -104,10 +126,11 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
         size="sm"
         onClick={handleTrain}
         className="w-full"
+        aria-label={`Entrenar asistente ${assistant.name}`}
       >
-        <GraduationCap className="w-4 h-4" />
+        <GraduationCap className="w-4 h-4" aria-hidden="true" />
         Entrenar
       </Button>
-    </div>
+    </article>
   );
 }
