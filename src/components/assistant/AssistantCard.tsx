@@ -29,7 +29,6 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
 
   return (
     <Card variant="hover" className="relative group">
-      {/* Menú de acciones */}
       <div className="absolute top-3 right-3">
         <button
           onClick={() => setShowMenu(!showMenu)}
@@ -38,7 +37,6 @@ export default function AssistantCard({ assistant, onEdit, onDelete }: Assistant
           <MoreVertical className="w-5 h-5" />
         </button>
 
-        {/* Dropdown menu */}
         {showMenu && (
           <>
             <div

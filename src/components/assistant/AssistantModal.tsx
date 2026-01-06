@@ -22,7 +22,7 @@ interface AssistantModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (data: AssistantFormData) => void;
-  assistant?: Assistant | null; // Si existe, es modo edición
+  assistant?: Assistant | null; 
 }
 
 const initialStepOne: AssistantStepOne = {
@@ -50,7 +50,6 @@ export default function AssistantModal({
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Cargar datos si es edición
   useEffect(() => {
     if (assistant) {
       setStepOneData({
@@ -72,7 +71,6 @@ export default function AssistantModal({
 
   const handleStepOneChange = (field: keyof AssistantStepOne, value: string) => {
     setStepOneData((prev) => ({ ...prev, [field]: value }));
-    // Limpiar error del campo
     if (errors[field]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -85,7 +83,6 @@ export default function AssistantModal({
   const handleResponseLengthChange = (field: keyof ResponseLength, value: number) => {
     const clampedValue = Math.max(0, Math.min(100, value));
     setResponseLength((prev) => ({ ...prev, [field]: clampedValue }));
-    // Limpiar error
     if (errors.responseLength) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -119,7 +116,6 @@ export default function AssistantModal({
 
     setIsSubmitting(true);
     
-    // Simular delay de guardado
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     const formData: AssistantFormData = {
@@ -152,7 +148,6 @@ export default function AssistantModal({
       title={assistant ? 'Editar Asistente' : 'Crear Asistente'}
       size="lg"
     >
-      {/* Indicador de pasos */}
       <div className="px-6 pt-2 pb-4">
         <div className="flex items-center justify-center gap-3">
           <div className="flex items-center gap-2">
@@ -195,7 +190,6 @@ export default function AssistantModal({
         </div>
       </div>
 
-      {/* Contenido del paso */}
       <div className="px-6 pb-6">
         {currentStep === 1 ? (
           <div className="space-y-4">
@@ -230,7 +224,6 @@ export default function AssistantModal({
           </div>
         ) : (
           <div className="space-y-5">
-            {/* Longitud de respuestas */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Longitud de respuestas <span className="text-red-500">*</span>
@@ -240,7 +233,6 @@ export default function AssistantModal({
               </p>
 
               <div className="space-y-4">
-                {/* Cortas */}
                 <div>
                   <div className="flex justify-between items-center mb-1.5">
                     <span className="text-sm text-gray-600">Respuestas cortas</span>
@@ -260,7 +252,6 @@ export default function AssistantModal({
                   />
                 </div>
 
-                {/* Medianas */}
                 <div>
                   <div className="flex justify-between items-center mb-1.5">
                     <span className="text-sm text-gray-600">Respuestas medianas</span>
@@ -280,7 +271,6 @@ export default function AssistantModal({
                   />
                 </div>
 
-                {/* Largas */}
                 <div>
                   <div className="flex justify-between items-center mb-1.5">
                     <span className="text-sm text-gray-600">Respuestas largas</span>
@@ -301,7 +291,6 @@ export default function AssistantModal({
                 </div>
               </div>
 
-              {/* Total */}
               <div
                 className={`mt-4 p-3 rounded-lg ${
                   isValidTotal ? 'bg-green-50' : 'bg-red-50'
@@ -335,7 +324,6 @@ export default function AssistantModal({
               )}
             </div>
 
-            {/* Audio habilitado */}
             <div className="flex items-center gap-3">
               <input
                 type="checkbox"
@@ -352,7 +340,6 @@ export default function AssistantModal({
         )}
       </div>
 
-      {/* Footer con botones */}
       <div className="px-6 py-4 bg-gray-50 rounded-b-xl flex justify-between">
         {currentStep === 1 ? (
           <>

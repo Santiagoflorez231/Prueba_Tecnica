@@ -13,7 +13,6 @@ export default function ChatSimulator() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll al final cuando hay nuevos mensajes
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -25,7 +24,6 @@ export default function ChatSimulator() {
   const handleSendMessage = async () => {
     if (!input.trim() || isTyping) return;
 
-    // Agregar mensaje del usuario
     const userMessage: ChatMessage = {
       id: generateId(),
       content: input.trim(),
@@ -37,11 +35,9 @@ export default function ChatSimulator() {
     setInput('');
     setIsTyping(true);
 
-    // Simular delay de respuesta (1-2 segundos)
     const delay = 1000 + Math.random() * 1000;
     await new Promise((resolve) => setTimeout(resolve, delay));
 
-    // Agregar respuesta del asistente
     const assistantMessage: ChatMessage = {
       id: generateId(),
       content: getRandomResponse(),
@@ -68,7 +64,6 @@ export default function ChatSimulator() {
 
   return (
     <div className="bg-white rounded-xl shadow-sm flex flex-col h-[500px]">
-      {/* Header */}
       <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-900">Chat Simulado</h2>
@@ -80,7 +75,6 @@ export default function ChatSimulator() {
         </Button>
       </div>
 
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 ? (
           <div className="h-full flex items-center justify-center text-gray-400 text-sm">
@@ -110,7 +104,6 @@ export default function ChatSimulator() {
         )}
       </div>
 
-      {/* Input */}
       <div className="px-4 py-4 border-t border-gray-200">
         <div className="flex gap-2">
           <Input

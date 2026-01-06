@@ -17,14 +17,12 @@ export default function TrainingSection({ rules, onSave }: TrainingSectionProps)
   const handleSave = async () => {
     setIsSaving(true);
     
-    // Simular guardado
     await new Promise((resolve) => setTimeout(resolve, 800));
     
     onSave(content);
     setIsSaving(false);
     setShowSuccess(true);
 
-    // Ocultar mensaje de éxito después de 3 segundos
     setTimeout(() => {
       setShowSuccess(false);
     }, 3000);
