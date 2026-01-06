@@ -109,9 +109,8 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
             <h2 id={titleId} className="text-lg font-semibold text-gray-900">{title}</h2>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors focus:outline-none"
               aria-label="Cerrar modal"
-              tabIndex={0}
             >
               <X className="w-5 h-5" />
             </button>

@@ -9,19 +9,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = '', variant = 'primary', size = 'md', isLoading, children, disabled, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+      'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variants = {
       primary:
-        'bg-[#EB3C62] text-white hover:bg-[#D32A4F] focus:ring-[#EB3C62] active:bg-[#C0213F]',
+        'bg-[#EB3C62] text-white hover:bg-[#D32A4F] active:bg-[#C0213F]',
       secondary:
-        'bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-400 active:bg-gray-300 border border-gray-300',
+        'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300 border border-gray-300',
       danger:
-        'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 active:bg-red-800',
+        'bg-red-600 text-white hover:bg-red-700 active:bg-red-800',
       ghost:
-        'bg-transparent text-gray-600 hover:bg-gray-100 focus:ring-gray-400 active:bg-gray-200',
+        'bg-transparent text-gray-600 hover:bg-gray-100 active:bg-gray-200',
       orange:
-        'bg-[#FFAA4D] text-gray-900 hover:bg-[#E8953A] focus:ring-[#FFAA4D] active:bg-[#D68A35]',
+        'bg-[#FFAA4D] text-gray-900 hover:bg-[#E8953A] active:bg-[#D68A35]',
     };
 
     const sizes = {
