@@ -48,9 +48,9 @@ export default function TrainingPage() {
     );
   }
 
-  const toneColors: Record<string, 'default' | 'primary' | 'success' | 'warning'> = {
+  const toneColors: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'orange'> = {
     Formal: 'default',
-    Casual: 'primary',
+    Casual: 'orange',
     Profesional: 'success',
     Amigable: 'warning',
   };
@@ -68,7 +68,7 @@ export default function TrainingPage() {
             <div className="h-6 w-px bg-gray-200" />
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-violet-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#FFAA4D] to-[#EB3C62] rounded-xl flex items-center justify-center">
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -90,8 +90,8 @@ export default function TrainingPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                <Globe className="w-5 h-5 text-blue-600" />
+              <div className="w-10 h-10 bg-[#EB3C62]/10 rounded-lg flex items-center justify-center">
+                <Globe className="w-5 h-5 text-[#EB3C62]" />
               </div>
               <div>
                 <p className="text-xs text-gray-500">Idioma</p>
@@ -100,8 +100,8 @@ export default function TrainingPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-purple-600" />
+              <div className="w-10 h-10 bg-[#FFAA4D]/10 rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-[#FFAA4D]" />
               </div>
               <div>
                 <p className="text-xs text-gray-500">Tono</p>
@@ -115,13 +115,13 @@ export default function TrainingPage() {
             <div>
               <p className="text-xs text-gray-500 mb-2">Longitud de respuestas</p>
               <div className="flex gap-2 text-xs">
-                <span className="px-2 py-1 bg-green-100 text-green-700 rounded">
+                <span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded">
                   Cortas: {assistant.responseLength.short}%
                 </span>
-                <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded">
+                <span className="px-2 py-1 bg-[#FFAA4D]/20 text-[#D68A35] rounded">
                   Medianas: {assistant.responseLength.medium}%
                 </span>
-                <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded">
+                <span className="px-2 py-1 bg-[#EB3C62]/10 text-[#EB3C62] rounded">
                   Largas: {assistant.responseLength.long}%
                 </span>
               </div>

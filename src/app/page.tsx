@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { LayoutGrid, List } from 'lucide-react';
 import { Header } from '@/components/layout';
 import { LoadingDots } from '@/components/ui';
 import {
+  AssistantCard,
   AssistantList,
   AssistantModal,
   DeleteConfirmModal,
@@ -20,6 +22,7 @@ export default function HomePage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedAssistant, setSelectedAssistant] = useState<Assistant | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
 
   const handleCreateClick = () => {
     setSelectedAssistant(null);
@@ -79,20 +82,61 @@ export default function HomePage() {
           <EmptyState onCreateClick={handleCreateClick} />
         ) : (
           <>
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold text-gray-900">
-                Mis Asistentes
-              </h2>
-              <p className="text-sm text-gray-500 mt-1">
-                {assistants.length} asistente{assistants.length !== 1 ? 's' : ''} creado{assistants.length !== 1 ? 's' : ''}
-              </p>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">
+                  Mis Asistentes
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {assistants.length} asistente{assistants.length !== 1 ? 's' : ''} creado{assistants.length !== 1 ? 's' : ''}
+                </p>
+              </div>
+
+              {/* Toggle de vista */}
+              <div className="flex items-center gap-1 bg-white rounded-xl border border-gray-200 p-1">
+                <button
+                  onClick={() => setViewMode('cards')}
+                  className={`p-2 rounded-lg transition-colors ${
+                    viewMode === 'cards'
+                      ? 'bg-[#EB3C62] text-white'
+                      : 'text-gray-500 hover:bg-gray-100'
+                  }`}
+                  title="Vista de tarjetas"
+                >
+                  <LayoutGrid className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-lg transition-colors ${
+                    viewMode === 'list'
+                      ? 'bg-[#EB3C62] text-white'
+                      : 'text-gray-500 hover:bg-gray-100'
+                  }`}
+                  title="Vista de lista"
+                >
+                  <List className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            <AssistantList
-              assistants={assistants}
-              onEdit={handleEditClick}
-              onDelete={handleDeleteClick}
-            />
+            {viewMode === 'cards' ? (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                {assistants.map((assistant) => (
+                  <AssistantCard
+                    key={assistant.id}
+                    assistant={assistant}
+                    onEdit={handleEditClick}
+                    onDelete={handleDeleteClick}
+                  />
+                ))}
+              </div>
+            ) : (
+              <AssistantList
+                assistants={assistants}
+                onEdit={handleEditClick}
+                onDelete={handleDeleteClick}
+              />
+            )}
           </>
         )}
       </main>

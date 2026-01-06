@@ -87,14 +87,14 @@ export default function ChatSimulator() {
             ))}
             {isTyping && (
               <div className="flex gap-3 items-center">
-                <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
-                  <Loader2 className="w-4 h-4 text-violet-600 animate-spin" />
+                <div className="w-8 h-8 bg-gradient-to-br from-[#FFAA4D] to-[#EB3C62] rounded-full flex items-center justify-center">
+                  <Loader2 className="w-4 h-4 text-white animate-spin" />
                 </div>
                 <div className="bg-gray-100 px-4 py-2.5 rounded-2xl rounded-tl-none">
                   <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="w-2 h-2 bg-[#EB3C62] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-2 h-2 bg-[#FFAA4D] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-2 h-2 bg-[#EB3C62] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               </div>

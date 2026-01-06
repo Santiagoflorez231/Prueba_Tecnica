@@ -39,7 +39,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
               ${
                 error
                   ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                  : 'border-gray-300 focus:border-violet-500 focus:ring-violet-200'
+                  : 'border-gray-300 focus:border-[#EB3C62] focus:ring-[#EB3C62]/20'
               }
               ${className}
             `}

@@ -24,8 +24,7 @@ export default function Header({ onCreateClick }: HeaderProps) {
             />
           </div>
 
-          <Button onClick={onCreateClick} variant="rose">
-            
+          <Button onClick={onCreateClick} variant="primary">            
             <Plus className="w-4 h-4" />
             <span className="hidden sm:inline">Crear Asistente</span>
             <span className="sm:hidden">Crear</span>

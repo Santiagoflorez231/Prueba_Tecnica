@@ -13,9 +13,9 @@ export default function LoadingDots({ size = 'md', text }: LoadingDotsProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <div className="flex flex-row gap-2">
-        <div className={`${sizes[size]} rounded-full bg-rose-500 animate-bounce`} />
-        <div className={`${sizes[size]} rounded-full bg-rose-500 animate-bounce [animation-delay:-.3s]`} />
-        <div className={`${sizes[size]} rounded-full bg-rose-500 animate-bounce [animation-delay:-.5s]`} />
+        <div className={`${sizes[size]} rounded-full bg-[#EB3C62] animate-bounce`} />
+        <div className={`${sizes[size]} rounded-full bg-[#FFAA4D] animate-bounce [animation-delay:-.3s]`} />
+        <div className={`${sizes[size]} rounded-full bg-[#EB3C62] animate-bounce [animation-delay:-.5s]`} />
       </div>
       {text && <p className="text-gray-500 text-sm">{text}</p>}
     </div>

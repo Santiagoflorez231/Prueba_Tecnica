@@ -154,7 +154,7 @@ export default function AssistantModal({
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
                 currentStep >= 1
-                  ? 'bg-violet-600 text-white'
+                  ? 'bg-[#EB3C62] text-white'
                   : 'bg-gray-200 text-gray-500'
               }`}
             >
@@ -168,7 +168,7 @@ export default function AssistantModal({
           <div className="w-12 h-0.5 bg-gray-200">
             <div
               className={`h-full transition-all ${
-                currentStep >= 2 ? 'bg-violet-600 w-full' : 'w-0'
+                currentStep >= 2 ? 'bg-[#EB3C62] w-full' : 'w-0'
               }`}
             />
           </div>
@@ -177,7 +177,7 @@ export default function AssistantModal({
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
                 currentStep >= 2
-                  ? 'bg-violet-600 text-white'
+                  ? 'bg-[#EB3C62] text-white'
                   : 'bg-gray-200 text-gray-500'
               }`}
             >
@@ -248,7 +248,7 @@ export default function AssistantModal({
                     onChange={(e) =>
                       handleResponseLengthChange('short', parseInt(e.target.value))
                     }
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-500"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                   />
                 </div>
 
@@ -267,7 +267,7 @@ export default function AssistantModal({
                     onChange={(e) =>
                       handleResponseLengthChange('medium', parseInt(e.target.value))
                     }
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-yellow-500"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FFAA4D]"
                   />
                 </div>
 
@@ -286,7 +286,7 @@ export default function AssistantModal({
                     onChange={(e) =>
                       handleResponseLengthChange('long', parseInt(e.target.value))
                     }
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#EB3C62]"
                   />
                 </div>
               </div>
@@ -330,7 +330,7 @@ export default function AssistantModal({
                 id="audioEnabled"
                 checked={audioEnabled}
                 onChange={(e) => setAudioEnabled(e.target.checked)}
-                className="w-4 h-4 text-violet-600 rounded border-gray-300 focus:ring-violet-500"
+                className="w-4 h-4 text-[#EB3C62] rounded border-gray-300 focus:ring-[#EB3C62]"
               />
               <label htmlFor="audioEnabled" className="text-sm text-gray-700">
                 Habilitar respuestas de audio

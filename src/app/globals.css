@@ -3,11 +3,19 @@
 :root {
   --background: #f9fafb;
   --foreground: #111827;
+  
+  /* Colores de marca Funnelhot */
+  --funnelhot-orange: #FFAA4D;
+  --funnelhot-orange-dark: #E8953A;
+  --funnelhot-rose: #EB3C62;
+  --funnelhot-rose-dark: #D32A4F;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-funnelhot-orange: var(--funnelhot-orange);
+  --color-funnelhot-rose: var(--funnelhot-rose);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -57,7 +65,31 @@ body {
 
 /* Focus visible para accesibilidad */
 *:focus-visible {
-  outline: 2px solid #8b5cf6;
+  outline: 2px solid #EB3C62;
   outline-offset: 2px;
+}
+
+.bg-funnelhot-orange {
+  background-color: #FFAA4D;
+}
+
+.bg-funnelhot-rose {
+  background-color: #EB3C62;
+}
+
+.text-funnelhot-orange {
+  color: #FFAA4D;
+}
+
+.text-funnelhot-rose {
+  color: #EB3C62;
+}
+
+.border-funnelhot-orange {
+  border-color: #FFAA4D;
+}
+
+.border-funnelhot-rose {
+  border-color: #EB3C62;
 }
 

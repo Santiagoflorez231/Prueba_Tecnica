@@ -11,7 +11,7 @@ export default function NotFound() {
           </h1>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-violet-500 to-rose-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-[#FFAA4D] to-[#EB3C62] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#EB3C62]/20">
                 <span className="text-4xl sm:text-5xl">🤖</span>
               </div>
             </div>
@@ -29,7 +29,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-violet-600 text-white font-medium rounded-lg hover:bg-violet-700 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#EB3C62] text-white font-medium rounded-lg hover:bg-[#d63456] transition-colors shadow-md shadow-[#EB3C62]/20"
           >
             <Home className="w-5 h-5" />
             Ir al inicio

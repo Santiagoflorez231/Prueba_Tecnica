@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { MoreVertical, Pencil, Trash2, GraduationCap, Volume2 } from 'lucide-react';
+import { Bot, Pencil, Trash2, GraduationCap, Volume2, Globe, MessageSquare } from 'lucide-react';
 import { Assistant } from '@/types/assistant';
-import { Card, Badge } from '@/components/ui';
+import { Badge, Button } from '@/components/ui';
 
 interface AssistantCardProps {
   assistant: Assistant;
@@ -14,122 +13,101 @@ interface AssistantCardProps {
 
 export default function AssistantCard({ assistant, onEdit, onDelete }: AssistantCardProps) {
   const router = useRouter();
-  const [showMenu, setShowMenu] = useState(false);
 
   const handleTrain = () => {
     router.push(`/${assistant.id}`);
   };
 
-  const toneColors: Record<string, 'default' | 'primary' | 'success' | 'warning'> = {
+  const toneColors: Record<string, 'default' | 'primary' | 'success' | 'warning' | 'orange'> = {
     Formal: 'default',
-    Casual: 'primary',
+    Casual: 'orange',
     Profesional: 'success',
     Amigable: 'warning',
   };
 
   return (
-    <Card variant="hover" className="relative group">
-      <div className="absolute top-3 right-3">
-        <button
-          onClick={() => setShowMenu(!showMenu)}
-          className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-        >
-          <MoreVertical className="w-5 h-5" />
-        </button>
-
-        {showMenu && (
-          <>
-            <div
-              className="fixed inset-0 z-10"
-              onClick={() => setShowMenu(false)}
-            />
-            <div className="absolute right-0 top-full mt-1 w-44 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
-              <button
-                onClick={() => {
-                  onEdit(assistant);
-                  setShowMenu(false);
-                }}
-                className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
-              >
-                <Pencil className="w-4 h-4" />
-                Editar
-              </button>
-              <button
-                onClick={() => {
-                  handleTrain();
-                  setShowMenu(false);
-                }}
-                className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
-              >
-                <GraduationCap className="w-4 h-4" />
-                Entrenar
-              </button>
-              <hr className="my-1 border-gray-200" />
-              <button
-                onClick={() => {
-                  onDelete(assistant);
-                  setShowMenu(false);
-                }}
-                className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-              >
-                <Trash2 className="w-4 h-4" />
-                Eliminar
-              </button>
+    <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 p-5">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+            <Bot className="w-6 h-6 text-gray-600" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 truncate max-w-[180px]">
+              {assistant.name}
+            </h3>
+            <div className="flex items-center gap-2 mt-0.5">
+              <span className="text-xs text-gray-500 flex items-center gap-1">
+                <Globe className="w-3 h-3" />
+                {assistant.language}
+              </span>
+              {assistant.audioEnabled && (
+                <span className="text-xs text-[#EB3C62] flex items-center gap-1">
+                  <Volume2 className="w-3 h-3" />
+                  Audio
+                </span>
+              )}
             </div>
-          </>
-        )}
-      </div>
-
-      {/* Contenido de la tarjeta */}
-      <div className="pr-10">
-        {/* Nombre */}
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          {assistant.name}
-        </h3>
-
-        {/* Idioma y Tono */}
-        <div className="flex flex-wrap gap-2 mb-3">
-          <Badge variant="primary">{assistant.language}</Badge>
-          <Badge variant={toneColors[assistant.tone] || 'default'}>
-            {assistant.tone}
-          </Badge>
-        </div>
-
-        {/* Longitud de respuestas */}
-        <div className="mb-3">
-          <p className="text-xs text-gray-500 mb-1.5">Longitud de respuestas</p>
-          <div className="flex gap-1 h-2 rounded-full overflow-hidden bg-gray-100">
-            <div
-              className="bg-green-400 transition-all"
-              style={{ width: `${assistant.responseLength.short}%` }}
-              title={`Cortas: ${assistant.responseLength.short}%`}
-            />
-            <div
-              className="bg-yellow-400 transition-all"
-              style={{ width: `${assistant.responseLength.medium}%` }}
-              title={`Medianas: ${assistant.responseLength.medium}%`}
-            />
-            <div
-              className="bg-orange-400 transition-all"
-              style={{ width: `${assistant.responseLength.long}%` }}
-              title={`Largas: ${assistant.responseLength.long}%`}
-            />
-          </div>
-          <div className="flex justify-between text-xs text-gray-400 mt-1">
-            <span>Cortas: {assistant.responseLength.short}%</span>
-            <span>Medianas: {assistant.responseLength.medium}%</span>
-            <span>Largas: {assistant.responseLength.long}%</span>
           </div>
         </div>
-
-        {/* Audio habilitado */}
-        {assistant.audioEnabled && (
-          <div className="flex items-center gap-1.5 text-sm text-violet-600">
-            <Volume2 className="w-4 h-4" />
-            <span>Audio habilitado</span>
-          </div>
-        )}
+        
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            onClick={() => onEdit(assistant)}
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            title="Editar"
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => onDelete(assistant)}
+            className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+            title="Eliminar"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
       </div>
-    </Card>
+
+      <div className="mb-4">
+        <Badge variant={toneColors[assistant.tone] || 'default'} size="sm">
+          <MessageSquare className="w-3 h-3 mr-1" />
+          {assistant.tone}
+        </Badge>
+      </div>
+
+      <div className="mb-4">
+        <p className="text-xs text-gray-500 mb-2">Longitud de respuestas</p>
+        <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden bg-gray-100">
+          <div
+            className="bg-emerald-400"
+            style={{ width: `${assistant.responseLength.short}%` }}
+          />
+          <div
+            className="bg-amber-400"
+            style={{ width: `${assistant.responseLength.medium}%` }}
+          />
+          <div
+            className="bg-[#EB3C62]"
+            style={{ width: `${assistant.responseLength.long}%` }}
+          />
+        </div>
+        <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+          <span>Cortas {assistant.responseLength.short}%</span>
+          <span>Medianas {assistant.responseLength.medium}%</span>
+          <span>Largas {assistant.responseLength.long}%</span>
+        </div>
+      </div>
+
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={handleTrain}
+        className="w-full"
+      >
+        <GraduationCap className="w-4 h-4" />
+        Entrenar
+      </Button>
+    </div>
   );
 }
