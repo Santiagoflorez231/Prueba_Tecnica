@@ -119,23 +119,32 @@ export default function HomePage() {
               </div>
             </div>
 
-            {viewMode === 'cards' ? (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-                {assistants.map((assistant) => (
-                  <AssistantCard
-                    key={assistant.id}
-                    assistant={assistant}
-                    onEdit={handleEditClick}
-                    onDelete={handleDeleteClick}
-                  />
-                ))}
+            <div className="max-h-[calc(100vh-280px)] overflow-y-auto pr-2 scrollbar-thin">
+              {viewMode === 'cards' ? (
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                  {assistants.map((assistant) => (
+                    <AssistantCard
+                      key={assistant.id}
+                      assistant={assistant}
+                      onEdit={handleEditClick}
+                      onDelete={handleDeleteClick}
+                    />
+                  ))
+                  }
+                </div>
+              ) : (
+                <AssistantList
+                  assistants={assistants}
+                  onEdit={handleEditClick}
+                  onDelete={handleDeleteClick}
+                />
+              )}
+            </div>
+            
+            {assistants.length > 6 && (
+              <div className="mt-4 text-center text-sm text-gray-500">
+                Mostrando {assistants.length} asistentes
               </div>
-            ) : (
-              <AssistantList
-                assistants={assistants}
-                onEdit={handleEditClick}
-                onDelete={handleDeleteClick}
-              />
             )}
           </>
         )}

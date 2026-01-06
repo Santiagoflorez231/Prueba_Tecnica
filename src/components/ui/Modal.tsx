@@ -49,13 +49,19 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
       document.addEventListener('keydown', handleTabKey);
       document.body.style.overflow = 'hidden';
       
-      // Focus en el modal al abrir
       setTimeout(() => {
-        const firstFocusable = modalRef.current?.querySelector<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        const focusableInput = modalRef.current?.querySelector<HTMLElement>(
+          'input:not([type="hidden"]), select, textarea'
         );
-        firstFocusable?.focus();
-      }, 0);
+        if (focusableInput) {
+          focusableInput.focus();
+        } else {
+          const firstFocusable = modalRef.current?.querySelector<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          firstFocusable?.focus();
+        }
+      }, 50);
     }
 
     return () => {
@@ -103,8 +109,9 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
             <h2 id={titleId} className="text-lg font-semibold text-gray-900">{title}</h2>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
               aria-label="Cerrar modal"
+              tabIndex={0}
             >
               <X className="w-5 h-5" />
             </button>
