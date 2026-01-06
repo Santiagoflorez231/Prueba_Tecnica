@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
 import { Header } from '@/components/layout';
+import { LoadingDots } from '@/components/ui';
 import {
   AssistantList,
   AssistantModal,
@@ -64,8 +64,8 @@ export default function HomePage() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-violet-600 animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <LoadingDots text="Cargando..." />
       </div>
     );
   }
