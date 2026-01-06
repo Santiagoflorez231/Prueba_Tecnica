@@ -27,39 +27,39 @@ export default function AssistantList({ assistants, onEdit, onDelete }: Assistan
 
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-      <div className="hidden md:grid md:grid-cols-12 gap-4 px-6 py-3 bg-gray-50 border-b border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
-        <div className="col-span-3">Nombre</div>
-        <div className="col-span-2">Idioma</div>
-        <div className="col-span-2">Tono</div>
-        <div className="col-span-2">Respuestas</div>
-        <div className="col-span-1">Audio</div>
-        <div className="col-span-2 text-right">Acciones</div>
+      <div className="hidden md:grid md:grid-cols-12 gap-4 px-4 lg:px-6 xl:px-8 py-3 lg:py-4 bg-gray-50 border-b border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
+        <div className="col-span-3 xl:col-span-3">Nombre</div>
+        <div className="col-span-2 xl:col-span-2">Idioma</div>
+        <div className="col-span-2 xl:col-span-2">Tono</div>
+        <div className="col-span-2 xl:col-span-2">Respuestas</div>
+        <div className="col-span-1 xl:col-span-1">Audio</div>
+        <div className="col-span-2 xl:col-span-2 text-right">Acciones</div>
       </div>
 
       <ul className="divide-y divide-gray-200">
         {assistants.map((assistant) => (
           <li
             key={assistant.id}
-            className="px-6 py-4 hover:bg-gray-50 transition-colors"
+            className="px-4 lg:px-6 xl:px-8 py-4 lg:py-5 hover:bg-gray-50 transition-colors"
           >
             <div className="hidden md:grid md:grid-cols-12 gap-4 items-center">
           
-              <div className="col-span-3">
-                <p className="font-medium text-gray-900">{assistant.name}</p>
+              <div className="col-span-3 xl:col-span-3">
+                <p className="font-medium text-gray-900 text-sm lg:text-base">{assistant.name}</p>
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-2 xl:col-span-2">
                 <Badge variant="primary">{assistant.language}</Badge>
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-2 xl:col-span-2">
                 <Badge variant={toneColors[assistant.tone] || 'default'}>
                   {assistant.tone}
                 </Badge>
               </div>
 
-              <div className="col-span-2">
-                <div className="flex gap-1 h-2 rounded-full overflow-hidden bg-gray-100 w-full max-w-[120px]">
+              <div className="col-span-2 xl:col-span-2">
+                <div className="flex gap-1 h-2 lg:h-2.5 rounded-full overflow-hidden bg-gray-100 w-full max-w-[140px] xl:max-w-[180px]">
                   <div
                     className="bg-green-400"
                     style={{ width: `${assistant.responseLength.short}%` }}
@@ -81,15 +81,15 @@ export default function AssistantList({ assistants, onEdit, onDelete }: Assistan
                 </p>
               </div>
 
-              <div className="col-span-1">
+              <div className="col-span-1 xl:col-span-1">
                 {assistant.audioEnabled ? (
-                  <Volume2 className="w-5 h-5 text-green-500" />
+                  <Volume2 className="w-5 h-5 lg:w-6 lg:h-6 text-green-500" />
                 ) : (
-                  <VolumeX className="w-5 h-5 text-gray-300" />
+                  <VolumeX className="w-5 h-5 lg:w-6 lg:h-6 text-gray-300" />
                 )}
               </div>
 
-              <div className="col-span-2 flex items-center justify-end gap-1">
+              <div className="col-span-2 xl:col-span-2 flex items-center justify-end gap-1 lg:gap-2">
                 <Button
                   variant="ghost"
                   size="sm"

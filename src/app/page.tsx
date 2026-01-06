@@ -74,7 +74,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50">
       <Header onCreateClick={handleCreateClick} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:max-w-screen-2xl py-6 sm:py-8 lg:py-10">
         {assistants.length === 0 ? (
           <EmptyState onCreateClick={handleCreateClick} />
         ) : (
