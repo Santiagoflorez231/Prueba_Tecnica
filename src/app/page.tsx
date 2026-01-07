@@ -14,24 +14,44 @@ import {
 import { useAssistants } from '@/hooks/useAssistants';
 import { Assistant, AssistantFormData } from '@/types/assistant';
 
+// Número de asistentes a mostrar por página
 const ITEMS_PER_PAGE = 6;
 
+/**
+ * Página Principal - Listado de Asistentes
+ * Ruta: /
+ * 
+ * Funcionalidades:
+ * - Listado de asistentes en formato tarjetas o lista
+ * - Búsqueda por nombre, idioma y tono
+ * - Paginación
+ * - CRUD completo (crear, editar, eliminar)
+ * - Navegación a página de entrenamiento
+ */
 export default function HomePage() {
+  // Hook personalizado para gestionar asistentes con persistencia
   const { assistants, isLoaded, createAssistant, updateAssistant, deleteAssistant } =
     useAssistants();
 
+  // Estados para controlar modales
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedAssistant, setSelectedAssistant] = useState<Assistant | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Estado para modo de visualización (tarjetas o lista)
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
+  
+  // Estados para toasts de confirmación
   const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
   const [showCreateSuccess, setShowCreateSuccess] = useState(false);
   const [showEditSuccess, setShowEditSuccess] = useState(false);
   
+  // Estados para búsqueda y paginación
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Filtrar asistentes según la búsqueda
   const filteredAssistants = useMemo(() => {
     if (!searchQuery.trim()) return assistants;
     
@@ -44,6 +64,7 @@ export default function HomePage() {
     );
   }, [assistants, searchQuery]);
 
+  // Calcular paginación
   const totalPages = Math.ceil(filteredAssistants.length / ITEMS_PER_PAGE);
   const paginatedAssistants = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;

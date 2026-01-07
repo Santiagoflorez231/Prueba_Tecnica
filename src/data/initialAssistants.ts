@@ -1,5 +1,10 @@
 import { Assistant } from '@/types/assistant';
 
+/**
+ * Asistentes de ejemplo para inicializar la aplicación
+ * Estos datos se cargan en localStorage solo si no existen datos previos
+ * Basados en los ejemplos proporcionados en los requerimientos
+ */
 export const initialAssistants: Assistant[] = [
   {
     id: '1',
