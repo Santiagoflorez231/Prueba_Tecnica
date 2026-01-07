@@ -59,7 +59,6 @@ export default function TrainingPage() {
     router.push('/');
   };
 
-  // Guardar y salir
   const handleSaveAndExit = async () => {
     setIsSaving(true);
     await new Promise((resolve) => setTimeout(resolve, 500));

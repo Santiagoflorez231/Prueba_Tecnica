@@ -2,12 +2,10 @@ import { Assistant } from '@/types/assistant';
 
 /**
  * Asistentes de ejemplo para inicializar la aplicación
- * Estos datos se cargan en localStorage solo si no existen datos previos
- * Basados en los ejemplos proporcionados en los requerimientos
  */
 export const initialAssistants: Assistant[] = [
   {
-    id: '1',
+    id: 'mk2u7e8x8unkcixyhen',
     name: 'Asistente de Ventas',
     language: 'Español',
     tone: 'Profesional',
@@ -21,7 +19,7 @@ export const initialAssistants: Assistant[] = [
       'Eres un asistente especializado en ventas. Siempre sé cordial y enfócate en identificar necesidades del cliente antes de ofrecer productos.',
   },
   {
-    id: '2',
+    id: 'mk35akcbgnt8d18sj1',
     name: 'Soporte Técnico',
     language: 'Inglés',
     tone: 'Amigable',

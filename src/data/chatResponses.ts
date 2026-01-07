@@ -1,4 +1,3 @@
-// Respuestas simuladas para el chat del asistente
 export const simulatedResponses: string[] = [
   'Entendido, ¿en qué más puedo ayudarte?',
   'Esa es una excelente pregunta. Déjame explicarte...',
