@@ -11,6 +11,7 @@ interface HeaderProps {
   title?: string;
   subtitle?: string;
   rightContent?: React.ReactNode;
+  onBackClick?: () => void; // Callback personalizado para el botón volver
 }
 
 export default function Header({ 
@@ -18,9 +19,19 @@ export default function Header({
   showBackButton = false,
   title,
   subtitle,
-  rightContent 
+  rightContent,
+  onBackClick 
 }: HeaderProps) {
   const router = useRouter();
+
+  // Usar callback personalizado o navegación por defecto
+  const handleBackClick = () => {
+    if (onBackClick) {
+      onBackClick();
+    } else {
+      router.push('/');
+    }
+  };
 
   return (
     <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-40 flex-shrink-0" role="banner">
@@ -32,8 +43,8 @@ export default function Header({
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  onClick={() => router.push('/')}
-                  className="text-gray-300 hover:text-white hover:bg-gray-800"
+                  onClick={handleBackClick}
+                  className="text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
                   aria-label="Volver al inicio"
                 >
                   <ArrowLeft className="w-4 h-4" aria-hidden="true" />

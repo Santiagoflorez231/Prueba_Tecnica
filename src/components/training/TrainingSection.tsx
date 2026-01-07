@@ -1,23 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Textarea } from '@/components/ui';
 import { Save, CheckCircle, AlertCircle, Info } from 'lucide-react';
 
 interface TrainingSectionProps {
   rules: string;
   onSave: (rules: string) => void;
+  onContentChange?: (rules: string, hasChanges: boolean) => void; // Notifica cambios al padre
 }
 
 const MIN_CHARS = 20;
 const MAX_CHARS = 5000;
 
-export default function TrainingSection({ rules, onSave }: TrainingSectionProps) {
+export default function TrainingSection({ rules, onSave, onContentChange }: TrainingSectionProps) {
   const [content, setContent] = useState(rules);
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
+
+  // Notificar al padre cuando hay cambios
+  useEffect(() => {
+    const hasChanges = content !== rules;
+    onContentChange?.(content, hasChanges);
+  }, [content, rules, onContentChange]);
 
   const validateContent = (value: string): string | null => {
     if (value.trim().length === 0) {

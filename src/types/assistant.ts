@@ -41,14 +41,12 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-// Datos del paso 1 del formulario de creación/edición
 export interface AssistantStepOne {
   name: string;
   language: Language | '';
   tone: Tone | '';
 }
 
-// Datos del paso 2 del formulario de creación/edición
 export interface AssistantStepTwo {
   responseLength: ResponseLength;
   audioEnabled: boolean;

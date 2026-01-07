@@ -1,12 +1,22 @@
 'use client';
 
+import { useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Bot, Globe, Volume2, MessageSquare, BarChart3 } from 'lucide-react';
 import { Button, Badge, LoadingDots, Card } from '@/components/ui';
 import { Header } from '@/components/layout';
-import { TrainingSection, ChatSimulator } from '@/components/training';
+import { TrainingSection, ChatSimulator, UnsavedChangesModal } from '@/components/training';
 import { useAssistants } from '@/hooks/useAssistants';
 
+/**
+ * Página de Entrenamiento del Asistente
+ * Ruta: /{id}
+ * 
+ * Permite:
+ * - Ver información del asistente
+ * - Editar instrucciones de entrenamiento
+ * - Simular conversaciones con el asistente
+ */
 export default function TrainingPage() {
   const params = useParams();
   const router = useRouter();
@@ -15,8 +25,48 @@ export default function TrainingPage() {
   const assistantId = params.id as string;
   const assistant = getAssistant(assistantId);
 
+  // Estados para control de cambios sin guardar
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showUnsavedModal, setShowUnsavedModal] = useState(false);
+  const [pendingRules, setPendingRules] = useState<string>('');
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Manejar guardado de entrenamiento
   const handleSaveTraining = (rules: string) => {
     updateTraining(assistantId, rules);
+    setHasUnsavedChanges(false);
+  };
+
+  // Detectar cambios en el entrenamiento
+  const handleTrainingChange = useCallback((rules: string, hasChanges: boolean) => {
+    setHasUnsavedChanges(hasChanges);
+    setPendingRules(rules);
+  }, []);
+
+  // Manejar click en volver
+  const handleBackClick = useCallback(() => {
+    if (hasUnsavedChanges) {
+      setShowUnsavedModal(true);
+    } else {
+      router.push('/');
+    }
+  }, [hasUnsavedChanges, router]);
+
+  // Descartar cambios y salir
+  const handleDiscardAndExit = () => {
+    setShowUnsavedModal(false);
+    setHasUnsavedChanges(false);
+    router.push('/');
+  };
+
+  // Guardar y salir
+  const handleSaveAndExit = async () => {
+    setIsSaving(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    updateTraining(assistantId, pendingRules);
+    setIsSaving(false);
+    setShowUnsavedModal(false);
+    router.push('/');
   };
 
   if (!isLoaded) {
@@ -61,10 +111,11 @@ export default function TrainingPage() {
         showBackButton 
         title={assistant.name}
         subtitle="Entrenamiento"
+        onBackClick={handleBackClick}
       />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <Card className="mb-6" padding="md">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 animate-in fade-in duration-300">
+        <Card className="mb-6 transition-all duration-200 hover:shadow-md" padding="md">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
@@ -118,10 +169,20 @@ export default function TrainingPage() {
           <TrainingSection
             rules={assistant.rules}
             onSave={handleSaveTraining}
+            onContentChange={handleTrainingChange}
           />
           <ChatSimulator />
         </div>
       </main>
+
+      {/* Modal de confirmación para cambios sin guardar */}
+      <UnsavedChangesModal
+        isOpen={showUnsavedModal}
+        onClose={() => setShowUnsavedModal(false)}
+        onDiscard={handleDiscardAndExit}
+        onSave={handleSaveAndExit}
+        isSaving={isSaving}
+      />
     </div>
   );
 }
