@@ -8,3 +8,4 @@ export { default as Textarea } from './Textarea';
 export { default as LoadingDots } from './LoadingDots';
 export { default as Pagination } from './Pagination';
 export { default as SearchInput } from './SearchInput';
+export { default as Toast } from './Toast';

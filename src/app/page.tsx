@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { LayoutGrid, List } from 'lucide-react';
 import { Header } from '@/components/layout';
-import { LoadingDots, Pagination, SearchInput } from '@/components/ui';
+import { LoadingDots, Pagination, SearchInput, Toast } from '@/components/ui';
 import {
   AssistantCard,
   AssistantList,
@@ -25,6 +25,9 @@ export default function HomePage() {
   const [selectedAssistant, setSelectedAssistant] = useState<Assistant | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards');
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+  const [showCreateSuccess, setShowCreateSuccess] = useState(false);
+  const [showEditSuccess, setShowEditSuccess] = useState(false);
   
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,8 +84,10 @@ export default function HomePage() {
         responseLength: data.responseLength,
         audioEnabled: data.audioEnabled,
       });
+      setShowEditSuccess(true);
     } else {
       createAssistant(data);
+      setShowCreateSuccess(true);
     }
   };
 
@@ -96,6 +101,8 @@ export default function HomePage() {
     setIsDeleting(false);
     setIsDeleteModalOpen(false);
     setSelectedAssistant(null);
+    
+    setShowDeleteSuccess(true);
   };
 
   if (!isLoaded) {
@@ -109,6 +116,22 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header onCreateClick={handleCreateClick} />
+
+      <Toast
+        message="Asistente eliminado correctamente"
+        isVisible={showDeleteSuccess}
+        onClose={() => setShowDeleteSuccess(false)}
+      />
+      <Toast
+        message="Asistente creado correctamente"
+        isVisible={showCreateSuccess}
+        onClose={() => setShowCreateSuccess(false)}
+      />
+      <Toast
+        message="Asistente actualizado correctamente"
+        isVisible={showEditSuccess}
+        onClose={() => setShowEditSuccess(false)}
+      />
 
       <main id="main-content" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:max-w-screen-2xl py-6 sm:py-8 lg:py-10">
         {assistants.length === 0 ? (

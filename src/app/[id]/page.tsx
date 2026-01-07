@@ -82,7 +82,6 @@ export default function TrainingPage() {
             <div className="hidden sm:block h-10 w-px bg-gray-200" />
 
             <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              {/* Tono */}
               <div className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-gray-400" />
                 <Badge variant={toneColors[assistant.tone] || 'default'} size="sm">
@@ -94,13 +93,13 @@ export default function TrainingPage() {
                 <BarChart3 className="w-4 h-4 text-gray-400" />
                 <div className="flex gap-1 text-xs">
                   <span className="px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded" title="Respuestas cortas">
-                    C: {assistant.responseLength.short}%
+                    Corta: {assistant.responseLength.short}%
                   </span>
                   <span className="px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded" title="Respuestas medianas">
-                    M: {assistant.responseLength.medium}%
+                    Mediana: {assistant.responseLength.medium}%
                   </span>
                   <span className="px-1.5 py-0.5 bg-[#EB3C62]/10 text-[#EB3C62] rounded" title="Respuestas largas">
-                    L: {assistant.responseLength.long}%
+                    Larga: {assistant.responseLength.long}%
                   </span>
                 </div>
               </div>
